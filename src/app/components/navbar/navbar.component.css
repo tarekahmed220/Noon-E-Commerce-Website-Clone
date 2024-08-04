@@ -17,11 +17,47 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-ul li {
+
+.mainSections > li {
   opacity: 1;
   transition: all 0.3s;
 }
-ul li:hover {
+.mainSections > li:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+.links {
+  transition: all 0.3s;
+}
+
+.links div::after {
+  content: "";
+  position: absolute;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+  top: -28px;
+  right: 21px;
+}
+.links li {
+  padding: 10px 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.links li:hover {
+  opacity: 1;
+  background-color: #f7f7fa;
+}
+.links button {
+  opacity: 1;
+}
+.links button:hover {
+  opacity: 0.7;
+}
+.TaregetFlipIcon {
+  transition: all 0.3s;
+}
+.flipIcon {
+  transform: rotate(180deg);
 }

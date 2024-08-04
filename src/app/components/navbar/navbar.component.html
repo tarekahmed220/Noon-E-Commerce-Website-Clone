@@ -2,11 +2,22 @@
   class="navbar bg-[--mainColor] h-[60px] flex justify-center items-center px-3"
 >
   <div class="part1" appFlexCenter>
-    <div class="logo flex items-center font-bold text-[18px]">
-      <img class="w-[30px]" src="/images/noon_logo.png" alt="noon logo" />
-      <span class="text-[24px] text-[#383a41]">noon</span>
+    <div
+      class="logo flex items-center font-bold text-[18px] cursor-pointer mx-2 md:mr-0"
+    >
+      <img
+        class="w-[20px] md:w-[30px]"
+        src="/images/noon_logo.png"
+        alt="noon logo"
+      />
+      <span
+        class="text-[18px] w-[62px] md:w-[89px] md:text-[24px] text-[#383a41]"
+        >noon</span
+      >
     </div>
-    <div class="deliveryTo flex mx-5">
+    <div
+      class="deliveryTo hidden lg:flex mx-5 cursor-pointer hover:opacity-[0.7]"
+    >
       <div class="flag flex items-center mx-2">
         <img class="w-[30px]" src="/images/egypt-flag.png" alt="" />
       </div>
@@ -24,7 +35,7 @@
     </div>
   </div>
   <input
-    class="flex-1 rounded px-3 py-2"
+    class="flex-1 rounded px-3 py-2 border-none outline-none text-[#646874]"
     type="text"
     name="searchInput"
     id="searchInput"
@@ -32,30 +43,129 @@
     pattern="^[A-Za-z0-9\s]+$"
     placeholder="What are you looking for?"
   />
-  <ul class="flex justify-center items-center gap-2">
+  <ul class="mainSections justify-center items-center gap-2 hidden lg:flex">
     <li class="language px-3 custom-border-right">العربية</li>
-    <li class="flex justify-center items-center custom-border-right">
+    <li
+      class="justify-center items-center custom-border-right relative hidden lg:flex"
+      (click)="changeShowLinksStatus()"
+    >
       <div class="flex flex-col">
         <span class="px-3 text-[14px] text-[#404b41dc]">Ahlan Tarek!</span>
-        <span class="font-semibold">My Account</span>
+        <span class="font-semibold text-[15px]">My Account</span>
       </div>
-      <div class="mr-2"><i class="fa-solid fa-caret-down"></i></div>
+      <div class="mr-2">
+        <i
+          class="TaregetFlipIcon fa-solid fa-caret-down"
+          [ngClass]="{ flipIcon: showLinks }"
+        ></i>
+      </div>
+      <div
+        [ngStyle]="{ display: showLinks ? 'block' : 'none' }"
+        class="links absolute top-[47px] right-0 w-[190px] bg-[#ffffff] shadow-lg pt-2"
+      >
+        <div class="relative">
+          <ul>
+            <li>
+              <span><i class="fa-regular fa-rectangle-list"></i></span> Orders
+            </li>
+            <li>
+              <span><i class="fa-solid fa-map-location-dot"></i></span> Address
+            </li>
+            <li>
+              <span><i class="fa-solid fa-money-check-dollar"></i></span>
+              Payment
+            </li>
+            <li>
+              <span><i class="fa-brands fa-cc-amazon-pay"></i></span> noon
+              Credits
+            </li>
+            <li>
+              <span><i class="fa-solid fa-arrow-rotate-left"></i></span> Returns
+            </li>
+            <li>
+              <span><i class="fa-solid fa-medal"></i></span> Warranty
+            </li>
+            <li>
+              <span><i class="fa-solid fa-id-card"></i></span> Profile
+            </li>
+            <li>
+              <span><i class="fa-solid fa-hands-holding-child"></i></span> Need
+              Help?
+            </li>
+            <button class="w-full py-2 border-t-[1px] text-[#7e859b]">
+              Sign Out
+            </button>
+          </ul>
+        </div>
+      </div>
     </li>
     <li class="px-3 custom-border-right">
       <span class="text-[#242524dc] font-semibold mr-[5px]">Wishlist</span>
-      <span class="text-[#242524dc] text-[19px]"
+      <span class="text-[#7e859b] text-[19px]"
         ><i class="fa-regular fa-heart"></i
       ></span>
     </li>
     <li class="px-3">
       <span class="font-semibold mr-2 text-[17px]">Cart</span>
       <span class="relative text-xl">
-        <i class="fa-solid fa-cart-shopping"></i>
+        <i class="fa-solid fa-cart-shopping text-[15px]"></i>
         <span
-          class="ordersQnt flex justify-center items-center bg-[#3d6be0] text-white p-[4px] rounded-full text-[12px] absolute top-[-12px] right-[-9px] w-[20px] h-[20px]"
+          class="ordersQnt flex justify-center items-center bg-[#3d6be0] text-white p-[4px] rounded-full text-[12px] absolute top-[-7px] right-[-9px] w-[18px] h-[18px]"
           >2</span
         >
       </span>
     </li>
   </ul>
+  <div
+    class="bars block lg:hidden mx-2 text-[22px] cursor-pointer relative"
+    (click)="changeShowLinksStatus()"
+  >
+    <i class="fa-solid fa-bars"></i>
+    <div
+      [ngStyle]="{ display: showLinks ? 'block' : 'none' }"
+      class="links absolute top-[47px] right-[-15px] w-[205px] lg:w-[190px] bg-[#ffffff] shadow-lg pt-2 z-20"
+    >
+      <div class="relative">
+        <ul>
+          <li>
+            <span><i class="fa-regular fa-rectangle-list"></i></span> Orders
+          </li>
+          <li>
+            <span><i class="fa-regular fa-heart"></i></span>
+            Wishlist
+          </li>
+          <li class="flex items-center">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Cart
+          </li>
+          <li>
+            <span><i class="fa-solid fa-map-location-dot"></i></span> Address
+          </li>
+          <li>
+            <span><i class="fa-solid fa-money-check-dollar"></i></span>
+            Payment
+          </li>
+          <li>
+            <span><i class="fa-brands fa-cc-amazon-pay"></i></span> noon Credits
+          </li>
+          <li>
+            <span><i class="fa-solid fa-arrow-rotate-left"></i></span> Returns
+          </li>
+          <li>
+            <span><i class="fa-solid fa-medal"></i></span> Warranty
+          </li>
+          <li>
+            <span><i class="fa-solid fa-id-card"></i></span> Profile
+          </li>
+          <li>
+            <span><i class="fa-solid fa-hands-holding-child"></i></span> Need
+            Help?
+          </li>
+          <button class="w-full py-2 border-t-[1px] text-[#7e859b]">
+            Sign Out
+          </button>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
