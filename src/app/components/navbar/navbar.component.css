@@ -3,6 +3,18 @@
   padding-right: 20px;
 }
 
+.navbar .links {
+  z-index: 1000;
+}
+
+.bars .links {
+  z-index: 1000;
+}
+
+.container .mainSlider {
+  z-index: 10;
+}
+
 .custom-border-right::after {
   content: "";
   position: absolute;
@@ -23,9 +35,9 @@
   transition: all 0.3s;
 }
 .mainSections > li:hover {
-  opacity: 0.7;
   cursor: pointer;
 }
+
 .links {
   transition: all 0.3s;
 }
@@ -119,3 +131,15 @@ ngb-carousel {
   max-width: 1440px;
 }
 /* slider */
+
+@keyframes flashing {
+  0%,
+  40% {
+    opacity: 1;
+    width: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 200%;
+  }
+}
