@@ -61,3 +61,61 @@
 .flipIcon {
   transform: rotate(180deg);
 }
+
+@media (max-width: 500px) {
+  .navbar input::placeholder {
+    font-size: 14px;
+  }
+}
+@media (min-width: 1020px) and (max-width: 1120px) {
+  .mainSections #targetli {
+    display: none;
+  }
+}
+.subNav ul li {
+  padding: 0 15px;
+  cursor: pointer;
+  transition: all 0.1s;
+  font-weight: bold;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.subNav ul li:hover {
+  background-color: white;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+    0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.subNav ul li:last-of-type {
+  color: red;
+  font-weight: bold;
+}
+@media (min-width: 632px) {
+  .allCategory::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 44px;
+    right: 0;
+    background-color: rgba(122, 120, 120, 0.26);
+  }
+}
+
+/* slider */
+ngb-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+}
+.picsum-img-wrapper {
+  max-width: 1440px;
+}
+/* slider */

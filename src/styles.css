@@ -5,3 +5,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #f7f7fa;
+}
+
+.subSlider2 .carousel-indicators {
+  height: 2px;
+  width: fit-content;
+  margin: 0 auto;
+}
+.subSlider2 .carousel-indicators [data-bs-target] {
+  width: 10px;
+  background-color: #404553;
+}
