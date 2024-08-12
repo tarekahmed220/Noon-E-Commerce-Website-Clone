@@ -1,42 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlexCenterDirective } from '../../CutomeDirectives/flex-center.directive';
 import { CommonModule } from '@angular/common';
-import {
-  NgbCarouselConfig,
-  NgbCarouselModule,
-} from '@ng-bootstrap/ng-bootstrap';
+
 import { SubSliderComponent } from '../sub-slider/sub-slider.component';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [
-    FlexCenterDirective,
-    CommonModule,
-    NgbCarouselModule,
-    SubSliderComponent,
-  ],
-  providers: [NgbCarouselConfig],
+  imports: [FlexCenterDirective, CommonModule, RouterLink],
+
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
-  constructor(config: NgbCarouselConfig) {
-    config.interval = 3000;
-    config.wrap = true;
-    config.keyboard = false;
-    config.pauseOnHover = false;
-  }
+export class NavbarComponent implements OnInit {
+  constructor(private router: Router, private _authServe: AuthService) {}
   showLinks: boolean = false;
-  images = [
-    '/images/1.jpg',
-    '/images/2.jpg',
-    '/images/3.jpg',
-    '/images/4.jpg',
-    '/images/5.jpg',
-    '/images/6.jpg',
-    '/images/slider7.gif',
-  ];
+  isLogin: boolean = false;
+
+  ngOnInit(): void {
+    this._authServe.isLogin.subscribe((status) => {
+      this.isLogin = status;
+    });
+  }
+
+  onSignOut() {
+    this._authServe.signOut();
+    this.router.navigate(['/signin']);
+  }
 
   changeShowLinksStatus() {
     this.showLinks = !this.showLinks;

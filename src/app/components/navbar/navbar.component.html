@@ -2,8 +2,9 @@
   class="navbar bg-[--mainColor] h-[60px] flex justify-center items-center px-1"
 >
   <div class="part1" appFlexCenter>
-    <div
+    <a
       class="logo flex items-center font-bold text-[18px] cursor-pointer mx-2 md:mr-0"
+      routerLink="/home"
     >
       <img
         class="w-[17px] md:w-[30px]"
@@ -14,7 +15,7 @@
         class="text-[15px] w-[30px] md:w-[89px] md:text-[24px] text-[#383a41]"
         >noon</span
       >
-    </div>
+    </a>
     <div
       class="deliveryTo hidden lg:flex mx-5 cursor-pointer hover:opacity-[0.7]"
     >
@@ -45,6 +46,13 @@
   />
   <ul class="mainSections justify-center items-center gap-2 hidden lg:flex">
     <li class="language px-3 custom-border-right">العربية</li>
+    @if(!isLogin){
+    <a class="flex flex-col items-center cursor-pointer" routerLink="/signin">
+      <span class="px-3 text-[14px] text-[#404b41dc]">Welcome Guest!</span>
+      <span class="font-semibold text-[15px]">Login / Register</span>
+    </a>
+    }@else {
+
     <li
       id="targetli"
       class="justify-center items-center custom-border-right relative hidden lg:flex"
@@ -93,13 +101,17 @@
               <span><i class="fa-solid fa-hands-holding-child"></i></span> Need
               Help?
             </li>
-            <button class="w-full py-2 border-t-[1px] text-[#7e859b]">
+            <button
+              class="w-full py-2 border-t-[1px] text-[#7e859b]"
+              (click)="onSignOut()"
+            >
               Sign Out
             </button>
           </ul>
         </div>
       </div>
     </li>
+    }
     <li class="px-3 custom-border-right">
       <span class="text-[#242524dc] font-semibold mr-[5px]">Wishlist</span>
       <span class="text-[#7e859b] text-[19px]"
@@ -193,54 +205,3 @@
     <li class="!hidden md:!flex">DEALS</li>
   </ul>
 </div>
-
-<!--  main slider -->
-<div class="container lg:w-[1487px] mainSlider">
-  <div class="ad">
-    <img src="/images/nooncredit2.jpg" alt="" />
-  </div>
-  @if (images) {
-  <ngb-carousel>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[0]" alt="Random first slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[1]" alt="Random second slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[2]" alt="Random third slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[3]" alt="Random fourth slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[4]" alt="Random fourth slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[5]" alt="Random fourth slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img [src]="images[6]" alt="Random fourth slide" />
-      </div>
-    </ng-template>
-  </ngb-carousel>
-  }
-</div>
-
-<!--  main slider
-<!-- sub slider -->
-<app-sub-slider></app-sub-slider>
-<!-- sub slider -->
