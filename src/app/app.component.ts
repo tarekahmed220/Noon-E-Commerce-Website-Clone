@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { LayoutComponent } from './components/layout/layout.component';
 
 @Component({
@@ -15,7 +16,11 @@ import { LayoutComponent } from './components/layout/layout.component';
     SignInComponent,
     FooterComponent,
     SignUpComponent,
+
+    ProductDetailsComponent,
+
     LayoutComponent,
+
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
