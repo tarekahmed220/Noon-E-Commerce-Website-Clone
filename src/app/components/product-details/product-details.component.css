@@ -1,0 +1,16 @@
+/* .drop-shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  } */
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #F0F4FD;
+  }
