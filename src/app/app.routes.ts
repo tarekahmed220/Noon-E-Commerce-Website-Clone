@@ -8,6 +8,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: 'signup', component: SignUpComponent },
       { path: 'sendemail', component: ResetPasswordComponent }, //for password
       { path: 'pressreset-password/:token', component: NewPasswordComponent }, //for new password
+      {path:'productDetails',component:ProductDetailsComponent},
       { path: 'verify/:token', component: ConfirmEmailComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', component: PagenotfoundComponent },
