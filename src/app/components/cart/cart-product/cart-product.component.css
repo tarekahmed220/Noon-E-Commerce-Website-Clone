@@ -1,0 +1,65 @@
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+} */
+
+:root{
+  --colorBorder: #dadce3;
+  --colorText: #7e859b;
+  --colorTextGreen: #38ae04;
+  --colorBtnOrder: #3866df;
+}
+
+.product{
+  background-color: white;
+  height: fit-content;
+}
+
+.nameProduct{
+  font-size: 14px;
+}
+
+.imageProduct{
+  width: 120px;
+}
+
+.detailsOrder{
+  font-size: 14px;
+}
+.textOrderTime{
+  color: #7e859b;
+}
+.textDate span{
+  color: #38ae04;
+}
+
+.textSold span{
+  color: #7e859b;
+}
+
+.removeBtn{
+  border: 1px solid #dadce3;
+  color: #7e859b;
+}
+
+.itemsText{
+  color: #7e859b;
+}
+
+.offPrice{
+  color: #7e859b;
+  text-decoration: line-through;
+}
+.offRate{
+  font-size: 13px;
+  color: #38ae04;
+}
+.delivery{
+  height: 16px;
+  font-size: 12px;
+}
+.qty{
+  color: #7e859b;
+}
