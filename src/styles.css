@@ -19,3 +19,32 @@ body {
   width: 10px;
   background-color: #404553;
 }
+
+.productsSlider .carousel-indicators {
+  width: fit-content;
+  margin: -25px auto;
+}
+.productsSlider .carousel-indicators [data-bs-target] {
+  width: 10px;
+  background-color: #404553;
+}
+.productsSlider .carousel-control-prev {
+  width: fit-content;
+  height: auto;
+  margin-left: 20px;
+}
+.productsSlider .carousel-control-prev-icon {
+  background-color: rgb(143, 145, 143);
+  padding: 25px;
+  border-radius: 50%;
+}
+.productsSlider .carousel-control-next {
+  width: fit-content;
+  height: auto;
+  margin-right: 20px;
+}
+.productsSlider .carousel-control-next-icon {
+  background-color: rgb(143, 145, 143);
+  padding: 25px;
+  border-radius: 50%;
+}

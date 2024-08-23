@@ -43,8 +43,215 @@
   </ngb-carousel>
   }
 </div>
-
 <!--  main slider
+  
   <!-- sub slider -->
 <app-sub-slider></app-sub-slider>
 <!-- sub slider -->
+<!-- second section -->
+<div class="container lg:w-[1480px] mt-4 mb-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- More reasons to shop -->
+    <div class="first bg-white p-3 flex-1">
+      <h2 class="font-bold text-2xl text-gray-700 mb-4">
+        More reasons to shop
+      </h2>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="box bg-[#f8f8f8] rounded-md overflow-hidden">
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              src="/images/second section/1.png"
+              class="object-cover w-full h-full"
+              alt="p1"
+            />
+          </div>
+        </div>
+        <div class="box bg-[#f8f8f8] rounded-md overflow-hidden">
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              src="/images/second section/2.png"
+              class="object-cover w-full h-full"
+              alt="p1"
+            />
+          </div>
+        </div>
+        <div class="box bg-[#f8f8f8] rounded-md overflow-hidden">
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              src="/images/second section/3.png"
+              class="object-cover w-full h-full"
+              alt="p1"
+            />
+          </div>
+        </div>
+        <div class="box bg-[#f8f8f8] rounded-md overflow-hidden">
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              src="/images/second section/4.png"
+              class="object-cover w-full h-full"
+              alt="p1"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekend mega deals -->
+    <div class="second bg-[#fdf6bb] p-3 flex-1 h-[518px]">
+      <h2 class="font-bold text-2xl text-gray-700 mb-4">Weekend mega deals</h2>
+      <div class="grid grid-cols-2 gap-3 h-[90%]">
+        <div
+          class="box bg-[#f8f8f8] rounded-md overflow-hidden h-full flex flex-col"
+        >
+          <div class="h-[68%] bg-white">
+            <img
+              src="/images/second section/5.jpg"
+              class="object-cover w-[90%] h-full"
+              alt="p1"
+            />
+          </div>
+          <div class="text p-2 h-[30%] flex flex-col justify-center">
+            <p class="text-sm">Kids essentials</p>
+            <p class="text-sm md:text-lg font-bold">Below 299 EGP</p>
+          </div>
+        </div>
+        <div
+          class="box bg-[#f8f8f8] rounded-md overflow-hidden h-full flex flex-col"
+        >
+          <div class="h-[68%] bg-white flex justify-center items-center">
+            <img
+              src="/images/second section/6.jpg"
+              class="object-cover w-[65%] h-full"
+              alt="p2"
+            />
+          </div>
+          <div class="text p-2 h-[30%] flex flex-col justify-center">
+            <p class="text-sm">Molped</p>
+            <p class="text-sm md:text-lg font-bold">Up to 40% off</p>
+          </div>
+        </div>
+        <div
+          class="box bg-[#f8f8f8] rounded-md overflow-hidden h-full flex flex-col"
+        >
+          <div class="h-[68%] bg-white flex justify-center items-center">
+            <img
+              src="/images/second section/7.jpg"
+              class="object-fill w-[63%] h-full"
+              alt="p3"
+            />
+          </div>
+          <div class="text p-2 h-[30%] flex flex-col justify-center">
+            <p class="text-sm">Cookware sets</p>
+            <p class="text-sm md:text-lg font-bold">Up to 30% off</p>
+          </div>
+        </div>
+        <div
+          class="box bg-[#f8f8f8] rounded-md overflow-hidden h-full flex flex-col"
+        >
+          <div class="h-[68%] bg-white flex justify-center items-center">
+            <img
+              src="/images/second section/8.jpg"
+              class="object-cover w-[63%] h-full"
+              alt="p4"
+            />
+          </div>
+          <div class="text p-2 h-[30%] flex flex-col justify-center">
+            <p class="text-sm">Cameras and accessories</p>
+            <p class="text-sm md:text-lg font-bold">Up to 45% off</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In focus -->
+    <div class="third bg-white p-3 flex-1">
+      <h2 class="font-bold text-2xl text-gray-700 mb-4">In focus</h2>
+      <div class="grid grid-cols-1 gap-3">
+        <div class="box w-full overflow-hidden">
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              src="/images/second section/focus1.png"
+              class="object-cover w-full h-full"
+              alt="focus1"
+            />
+          </div>
+        </div>
+        <div class="box w-full overflow-hidden">
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              src="/images/second section/focus2.png"
+              class="object-cover w-full h-full"
+              alt="focus2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- second section -->
+<!-- sectionWithSlider -->
+<div class="container lg:w-[1480px]">
+  <h2 class="text-xl font-bold ml-3 mb-2">Recomended For You</h2>
+  <app-section-with-slider [data]="recomendedforyou"></app-section-with-slider>
+</div>
+<!-- sectionWithSlider -->
+
+<!-- ads -->
+<div class="container lg:w-[1480px] mt-4 mb-4">
+  <div
+    class="relative lg:h-[225.85px] bg-white flex justify-center items-center"
+  >
+    <img src="/images/ads/casio.jpg" alt="" />
+  </div>
+  <div class="my-6">
+    <h2 class="text-xl font-bold ml-3 mb-2">Powerbanks</h2>
+    <app-section-with-slider [data]="powerbank"></app-section-with-slider>
+  </div>
+  <div>
+    <img src="/images/ads/5.png" alt="" />
+  </div>
+  <h2 class="text-xl font-bold ml-3 mb-2 mt-4">Gaming</h2>
+  <app-section-with-slider [data]="gaming"></app-section-with-slider>
+</div>
+<!-- ads -->
+<!-- third section -->
+<div class="container lg:w-[1480px] mt-4 mb-4">
+  <div class="lg:h-[300px] bg-[#f9e1da]">
+    <div class="flex lg:h-250px p-3 gap-2">
+      <div class="cursor-pointer">
+        <img src="/images/third section/1.jpg" alt="" />
+      </div>
+      <div class="cursor-pointer">
+        <img src="/images/third section/2.jpg" alt="" />
+      </div>
+      <div class="cursor-pointer">
+        <img src="/images/third section/3.jpg" alt="" />
+      </div>
+      <div class="cursor-pointer">
+        <img src="/images/third section/4.jpg" alt="" />
+      </div>
+      <div class="cursor-pointer">
+        <img src="/images/third section/5.jpg" alt="" />
+      </div>
+      <div class="cursor-pointer">
+        <img src="/images/third section/6.jpg" alt="" />
+      </div>
+      <div class="cursor-pointer">
+        <img src="/images/third section/7.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+  <h2 class="text-xl font-bold ml-3 mb-2 mt-4">Shirts</h2>
+  <app-section-with-slider [data]="shirts"></app-section-with-slider>
+</div>
+<div class="container lg:w-[1480px] mt-4 mb-4">
+  <img
+    src="https://f.nooncdn.com/mpcms/EN0003/assets/bfdfe45d-9a73-48ab-8275-677a7f443213.png?format=avif"
+    alt=""
+  />
+  <h2 class="text-xl font-bold ml-3 mb-2 mt-4">All Mobiles</h2>
+  <app-section-with-slider [data]="allMobiles"></app-section-with-slider>
+</div>
+<!-- third section -->
