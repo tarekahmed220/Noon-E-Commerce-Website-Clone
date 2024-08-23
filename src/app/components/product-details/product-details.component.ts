@@ -5,6 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ProductService } from '../../product.service';
 
+interface Product {
+  name: string;
+  image: string;
+  priceBeforeSale: number;
+  price: number;
+  rate: number;
+}
+
 @Component({
   selector: 'app-product-details',
   standalone: true,
