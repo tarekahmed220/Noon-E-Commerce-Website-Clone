@@ -58,8 +58,10 @@
       class="justify-center items-center custom-border-right relative hidden lg:flex"
       (click)="changeShowLinksStatus()"
     >
-      <div class="flex flex-col">
-        <span class="px-3 text-[14px] text-[#404b41dc]">Ahlan Tarek!</span>
+      <div class="flex flex-col justify-center items-center">
+        <span class="px-3 text-[14px] text-[#404b41dc]"
+          >Ahlan {{ userName }} !</span
+        >
         <span class="font-semibold text-[15px]">My Account</span>
       </div>
       <div class="mr-2">
@@ -113,7 +115,11 @@
     </li>
     }
     <li class="px-3 custom-border-right">
-      <span class="text-[#242524dc] font-semibold mr-[5px]">Wishlist</span>
+      <span
+        class="text-[#242524dc] font-semibold mr-[5px]"
+        routerLink="/wishlist"
+        >Wishlist</span
+      >
       <span class="text-[#7e859b] text-[19px]"
         ><i class="fa-regular fa-heart"></i
       ></span>

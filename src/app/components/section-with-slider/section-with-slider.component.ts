@@ -10,7 +10,7 @@ import {
   NgbCarouselConfig,
   NgbCarouselModule,
 } from '@ng-bootstrap/ng-bootstrap';
-import { ProductService } from '../../Services/product.service';
+import { FavoriteProductService } from '../../Services/product.service';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { IProduct } from '../../interface/ISomeProduct';
@@ -31,7 +31,7 @@ export class SectionWithSliderComponent implements OnChanges, OnInit {
 
   constructor(
     config2: NgbCarouselConfig,
-    private productService: ProductService,
+    private productService: FavoriteProductService,
     private authService: AuthService,
     private router: Router,
     private cartService: CartService

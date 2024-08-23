@@ -8,7 +8,7 @@ import { IProduct } from '../interface/IProduct';
 })
 export class CartService {
   private cartCountSubject = new BehaviorSubject<number>(0);
-  private products: IProduct[] = [
+  private products: any[] = [
     {
       id: 1,
       name: 'Samsung Galaxy A15 Dual SIM Light Blue 6GB RAM 128GB 4G LTE - Middle East Version',
@@ -87,8 +87,10 @@ export class CartService {
     return this.products;
   }
 
-  removeProduct(productId: number) {
-    this.products = this.products.filter((product) => product.id !== productId);
+  removeProduct(productId: string) {
+    this.products = this.products.filter(
+      (product) => product._id !== productId
+    );
   }
 
   getTotalItems() {
@@ -102,8 +104,8 @@ export class CartService {
     );
   }
 
-  updateProductQuantity(productId: number, quantity: number): void {
-    const product = this.products.find((p) => p.id === productId);
+  updateProductQuantity(productId: string, quantity: number): void {
+    const product = this.products.find((p) => p._id === productId);
     if (product) {
       product.quantity = quantity;
     }
