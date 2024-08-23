@@ -18,12 +18,13 @@ export class ProductCartComponent implements OnInit{
   constructor(private cartServ: CartService){}
 
   ngOnInit(): void {
-    this.products = this.cartServ.getProducts();
+    this.cartServ.getProducts().subscribe(products => {
+      this.products = products;
+    })
   }
 
   removeProduct(productId:number){
     this.cartServ.removeProduct(productId);
-    this.products = this.cartServ.getProducts();
   }
 
   updateQuantity(product: IProduct, event: Event): void {
@@ -32,15 +33,16 @@ export class ProductCartComponent implements OnInit{
       const value = parseInt(target.value, 10);
       if (!isNaN(value) && value > 0) {
         this.cartServ.updateProductQuantity(product.id, value);
-        product.quantity = value;
-        // console.log(value,true);
+        // product.quantity = value;
       } else {
         this.cartServ.updateProductQuantity(product.id, 0);
-        product.quantity = 0;
+        // product.quantity = 0;
         // this.removeProduct(product.id);
       }
     }
   }
 
-
+  getPriceAsNumber(price: string): number {
+    return parseFloat(price.replace(/[^\d.]/g, ''));
+  }
 }

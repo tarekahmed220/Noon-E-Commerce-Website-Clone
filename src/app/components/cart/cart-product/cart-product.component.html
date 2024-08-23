@@ -24,9 +24,9 @@
     </div>
     <div class="w-1/4 flex flex-col justify-between text-right">
       <div>
-        <p class="font-bold">EGP <strong class="text-lg">{{product.price}}</strong></p>
+        <p class="font-bold">EGP <strong class="text-lg">{{getPriceAsNumber(product.price)}}</strong></p>
         <p class="off text-gray-500">
-          <span class="line-through me-1">{{product.originalPrice}}</span>
+          <span class="line-through me-1">{{getPriceAsNumber(product.originalPrice)}}</span>
           <span class="text-[#38ae04] text-[13px] font-bold">17% OFF</span>
         </p>
         <div class="my-2">
