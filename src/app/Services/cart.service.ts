@@ -3,12 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IProduct } from '../interface/IProduct';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-
   private cartCountSubject = new BehaviorSubject<number>(0);
   private products: IProduct[] = [
     {
@@ -83,15 +81,14 @@ export class CartService {
         console.error('Error adding product to cart:', error);
       }
     );
+  }
 
-
-  getProducts() :IProduct[] {
+  getProducts(): IProduct[] {
     return this.products;
   }
 
-
   removeProduct(productId: number) {
-    this.products = this.products.filter(product => product.id !== productId);
+    this.products = this.products.filter((product) => product.id !== productId);
   }
 
   getTotalItems() {
@@ -99,11 +96,14 @@ export class CartService {
   }
 
   getSubTotal() {
-    return this.products.reduce((total, product) => total + product.price * product.quantity, 0);
+    return this.products.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
   }
 
   updateProductQuantity(productId: number, quantity: number): void {
-    const product = this.products.find(p => p.id === productId);
+    const product = this.products.find((p) => p.id === productId);
     if (product) {
       product.quantity = quantity;
     }
