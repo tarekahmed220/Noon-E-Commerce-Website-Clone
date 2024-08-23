@@ -25,21 +25,20 @@
         <img src="/images/cartImages/trash.svg" alt="Remove" /> Remove
       </button>
     </div>
-  </div>
-  <div class="w-1/4 flex flex-col justify-between text-right">
-    <div>
-      <p class="font-bold">
-        EGP <strong class="text-lg">{{ product.price }}</strong>
-      </p>
-      <p class="off text-gray-500">
-        <span class="line-through me-1">{{ product.originalPrice }}</span>
-        <span class="text-[#38ae04] text-[13px] font-bold">17% OFF</span>
-      </p>
-      <div class="my-2">
-        <img
-          src="/images/cartImages/fulfilment_express_v3-en.svg"
-          alt="Express Delivery"
-        />
+    <div class="w-1/4 flex flex-col justify-between text-right">
+      <div>
+        <p class="font-bold">EGP <strong class="text-lg">{{getPriceAsNumber(product.price)}}</strong></p>
+        <p class="off text-gray-500">
+          <span class="line-through me-1">{{getPriceAsNumber(product.originalPrice)}}</span>
+          <span class="text-[#38ae04] text-[13px] font-bold">17% OFF</span>
+        </p>
+        <div class="my-2">
+          <img src="/images/cartImages/fulfilment_express_v3-en.svg" alt="Express Delivery" />
+        </div>
+        <div class="text-[12px] h-4 flex justify-end items-center gap-2">
+          <img class="h-5" src="/images/cartImages/van-en.png" alt="Van" />
+          <strong class="text-green-600">Free Delivery</strong>
+        </div>
       </div>
       <div class="text-[12px] h-4 flex justify-end items-center gap-2">
         <img class="h-5" src="/images/cartImages/van-en.png" alt="Van" />
