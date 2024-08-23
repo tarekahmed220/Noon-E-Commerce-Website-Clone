@@ -1,0 +1,51 @@
+.box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.img img {
+  width: 100%;
+  height: auto;
+}
+
+.details {
+  text-align: center;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.add-to-cart {
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.title {
+  margin: 10px 0;
+}
+
+.favorite {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.favorite-icon {
+  font-size: 18px;
+}

@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+  .second {
+    height: auto;
+  }
+
+  .box {
+    height: auto;
+  }
+
+  .box img {
+    height: auto;
+  }
+}
