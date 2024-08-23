@@ -5,14 +5,6 @@
   --colorBtnOrder: #3866df;
 }
 
-.cartText{
-  color: #404553;
-}
-
-.itemsText{
-  color: #7e859b;
-}
-
 .offPrice{
   color: #7e859b;
   text-decoration: line-through;

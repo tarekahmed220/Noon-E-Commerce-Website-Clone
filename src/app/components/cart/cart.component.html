@@ -4,12 +4,11 @@
       <div>
         <div class="flex gap-2">
           <h3 class="cartText">Cart</h3>
-          <span class="itemsText self-end">(2 items)</span>
+          <span class="itemsText self-end">({{totalItems}} items)</span>
         </div>
         <div class="my-4">
           <a href=""><img class="w-full" src="/images/cartImages/noonImg.avif" alt="Cart Item" /></a>
         </div>
-        
         <app-cart-product></app-cart-product>
       </div>
     </section>
@@ -30,8 +29,8 @@
         </button>
         <div class="subTotal my-4">
           <div class="flex justify-between">
-            <span class="textSub">Subtotal (3 items)</span>
-            <span>EGP 35707.15</span>
+            <span class="textSub">Subtotal ({{totalItems}} items)</span>
+            <span>EGP {{subTotal}}</span>
           </div>
           <div class="my-4 flex justify-between">
             <span class="textShip">Shipping Fee</span>
