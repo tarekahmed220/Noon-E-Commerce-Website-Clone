@@ -42,4 +42,8 @@ export class AuthService {
   confirmEmail(token: string) {
     return this.http.get(`http://localhost:4000/verify/${token}`);
   }
+
+  getUserName() {
+    return this.http.get(`http://localhost:4000/getusername`);
+  }
 }

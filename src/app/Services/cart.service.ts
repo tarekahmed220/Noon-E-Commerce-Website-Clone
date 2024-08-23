@@ -7,9 +7,12 @@ import { IProduct } from '../interface/IProduct';
   providedIn: 'root',
 })
 export class CartService {
+
+ 
  private cartCountSubject = new BehaviorSubject<number>(0);
   
   private products: BehaviorSubject<IProduct[]> = new BehaviorSubject ([
+
     {
       id: 1,
       name: 'Samsung Galaxy A15 Dual SIM Light Blue 6GB RAM 128GB 4G LTE - Middle East Version',
@@ -102,7 +105,6 @@ export class CartService {
     return this.products.value.length;
   }
 
-
   getSubTotal(): number {
     return this.products.value.reduce((total, product) => total + parseFloat((product.price).replace(/[^\d.]/g, '')) * product.quantity, 0);
   }
@@ -111,12 +113,6 @@ export class CartService {
 
   }
 
-  // updateProductQuantity(productId: number, quantity: number): void {
-  //   const product = this.products.find(p => p.id === productId);
-  //   if (product) {
-  //     product.quantity = quantity;
-  //   }
-  // }
 
   updateProductQuantity(productId: number, quantity: number): void {
     const products = this.products.value;

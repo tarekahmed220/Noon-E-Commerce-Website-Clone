@@ -6,8 +6,9 @@ import { ProductCartComponent } from './cart-product/cart-product.component';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [ProductCartComponent,],
+  imports: [ProductCartComponent],
   templateUrl: './cart.component.html',
+
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
@@ -17,8 +18,7 @@ export class CartComponent implements OnInit{
   subTotal: number = 0;
   totalPrice: number = 0;
 
-
-  constructor(private cartServ: CartService){}
+  constructor(private cartServ: CartService) {}
 
   ngOnInit(): void {
     this.cartServ.getProducts().subscribe(products => {
@@ -32,5 +32,4 @@ export class CartComponent implements OnInit{
     this.totalItems = this.cartServ.getTotalItems();
     this.totalPrice = this.cartServ.getTotalPrice();
   }
-
 }
