@@ -1,0 +1,63 @@
+<div class="productsSlider">
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let group of groupedProducts; let i = index">
+      <div class="container d-flex flex-row gap-2">
+        @for (product of group; track $index) {
+        <div class="box">
+          <div class="img cursor-pointer" (click)="showDetails(product)">
+            <img
+              [src]="
+                product.image ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRABNkxFNOH2LwNqvrWyxMZkwa-3yp-4c5vRQ&s'
+              "
+              alt="{{ product.name }}"
+            />
+          </div>
+          <div class="details">
+            <div class="icons flex justify-between items-center">
+              <span class="rate">
+                <i class="fa-solid fa-star text-green-500 mx-1"></i>
+                {{ product.rate }}
+              </span>
+              <span
+                class="add-to-cart mr-2 cursor-pointer"
+                (click)="addToCart(product)"
+              >
+                <i class="fa-solid fa-cart-plus text-xl"></i>
+              </span>
+            </div>
+
+            <div class="title line-clamp-2 text-start font-semibold">
+              {{ product.name }}
+            </div>
+            <div class="price text-start font-bold">
+              EGP {{ product.price }}
+            </div>
+            <div class="flex justify-between">
+              <p class="text-start">
+                <i class="fa-solid fa-truck text-blue-500 text-xs"></i>
+                Free Delivery
+              </p>
+
+              <span
+                class="favorite cursor-pointer"
+                (click)="toggleFavorite(product)"
+              >
+                @if(product.isFavorite){
+                <i class="fa-solid fa-heart text-red-500"></i>
+                }@else {<i class="fa-regular fa-heart"></i> }
+              </span>
+            </div>
+            <span
+              ><img
+                class="my-2"
+                src="https://f.nooncdn.com/s/app/com/noon/images/fulfilment_express_v3-en.svg"
+                alt="Deliverylogo"
+            /></span>
+          </div>
+        </div>
+        }
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
