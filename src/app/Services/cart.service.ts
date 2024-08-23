@@ -8,70 +8,30 @@ import { IProduct } from '../interface/IProduct';
 })
 export class CartService {
 
- 
- private cartCountSubject = new BehaviorSubject<number>(0);
-  
-  private products: BehaviorSubject<IProduct[]> = new BehaviorSubject ([
-
-    {
-      id: 1,
-      name: 'Samsung Galaxy A15 Dual SIM Light Blue 6GB RAM 128GB 4G LTE - Middle East Version',
-      price: "EGP 132.65",
-      originalPrice: "EGP 9999.0",
-      discount: 17,
-      imageUrl: '/images/cartImages/1.avif',
-      orderTime: '10 h 27 m',
-      deliveryDate: 'date',
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: 'Apple iPhone 13 Pro Max 256GB',
-      price: "EGP 1500.0",
-      originalPrice: "EGP 1700.0",
-      discount: 12,
-      imageUrl: '/images/cartImages/1.avif',
-      orderTime: '5 h 30 m',
-      deliveryDate: 'tomorrow',
-      quantity: 1,
-    },
-    {
-      id: 3,
-      name: 'Dell XPS 13 Laptop',
-      price: "EGP 2000.0",
-      originalPrice: "EGP 2200.0",
-      discount: 9,
-      imageUrl: '/images/cartImages/1.avif',
-      orderTime: '12 h 45 m',
-      deliveryDate: 'in 2 days',
-      quantity: 1,
-    },
-  ]);
-
-
-  getProducts() : Observable<IProduct[]> {
-    return this.products.asObservable();
-  }
-
-  private updateProductsFn(products: IProduct[]): void {
-    this.products.next(products);
-  }
-
-  removeProduct(productId: number) {
-    const updatedProducts = this.products.value.filter(product => product.id !== productId);
-    this.updateProductsFn(updatedProducts);
-  }
+  private cartCountSubject = new BehaviorSubject<number>(0);
+  private cartProductsSubject = new BehaviorSubject<any[]>([]);
 
   constructor(private http: HttpClient) {
     this.fetchCartCount().subscribe(); // Fetch cart count on service initialization
+    this.fetchCartProducts().subscribe(); // Fetch cart products on service initialization
   }
 
+  // Return Observable for cart count
   get cartCount$(): Observable<number> {
     return this.cartCountSubject.asObservable();
   }
 
+  // Return Observable for cart products
+  get cartProduct$(): Observable<any[]> {
+    return this.cartProductsSubject.asObservable();
+  }
+
   updateCartCount(count: number): void {
     this.cartCountSubject.next(count);
+  }
+
+  updateCartProducts(products: any[]): void {
+    this.cartProductsSubject.next(products);
   }
 
   // وظيفة لإضافة عنصر إلى السلة
@@ -89,11 +49,20 @@ export class CartService {
     );
   }
 
+  // Fetch cart products from the server
+  fetchCartProducts(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:4000/getcartitems').pipe(
+      tap((products) => this.updateCartProducts(products))
+    );
+  }
+
   // إضافة عنصر إلى السلة وتحديث عدد العناصر
+  // Add product to cart and update count and products
   addProductToCart(productId: string, quantity: number = 1): void {
     this.addToCart(productId, quantity).subscribe(
       () => {
         this.fetchCartCount().subscribe(); // Update cart count after adding
+        this.fetchCartProducts().subscribe(); // Update cart products after adding
       },
       (error) => {
         console.error('Error adding product to cart:', error);
@@ -101,27 +70,47 @@ export class CartService {
     );
   }
 
-  getTotalItems() :number {
-    return this.products.value.length;
+  removeFromCart(productId: string): Observable<any> {
+    return this.http.delete(`http://localhost:4000/removefromcart/${productId}`).pipe(
+      tap(() => {
+        this.fetchCartCount().subscribe();
+        this.fetchCartProducts().subscribe();
+      })
+    );
   }
+
+  // updateProductQuantity(productId: number, quantity: number): void {
+  //   const products = this.cartProductsSubject.value;
+  //   const productIndex = products.findIndex(p => p.id === productId);
+  //   if (productIndex !== -1) {
+  //     products[productIndex].quantity = quantity;
+  //     console.log(...products);
+  //     this.updateCartProducts([...products]);
+  //   }
+  // }
+
+  updateProductQuantity(productId: string, quantity: number): Observable<any> {
+    return this.http.put(`http://localhost:4000/updatecart`, { productId, quantity }).pipe(
+      tap(() => {
+        this.fetchCartCount().subscribe();
+        this.fetchCartProducts().subscribe();
+      })
+    );
+
+  }
+
+  getTotalItems(): number {
+    return this.cartProductsSubject.value.length;
+  }
+
 
   getSubTotal(): number {
-    return this.products.value.reduce((total, product) => total + parseFloat((product.price).replace(/[^\d.]/g, '')) * product.quantity, 0);
-  }
-  getTotalPrice(): number{
-    return this.getSubTotal() + 10;
-
+    return this.cartProductsSubject.value.reduce((total, product) => total + parseFloat(product.productId.price.replace(/[^\d.]/g, '')) * product.quantity, 0);
   }
 
 
-  updateProductQuantity(productId: number, quantity: number): void {
-    const products = this.products.value;
-    const productIndex = products.findIndex(p => p.id === productId);
-    if (productIndex !== -1) {
-      products[productIndex].quantity = quantity;
-      this.updateProductsFn([...products]);
-
-    }
+  getTotalPrice(): number {
+    return this.getSubTotal();
   }
+
 }
-
