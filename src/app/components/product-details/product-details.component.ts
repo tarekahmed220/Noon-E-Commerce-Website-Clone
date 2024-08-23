@@ -1,13 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, HttpClientModule], // Ensure correct modules are imported
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css',
+  styleUrls: ['./product-details.component.css'],
 })
-export class ProductDetailsComponent {
-  window: any;
+export class ProductDetailsComponent implements OnInit {
+  product: any;
+
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    const productId = this.route.snapshot.paramMap.get('id');
+    if (productId) {
+      this.productService.getProductById(productId).subscribe(
+        (data) => {
+          this.product = data;
+          console.log('Product Data:', data); // Log the fetched data
+        },
+        (error) => {
+          console.error('Error fetching product data', error);
+        }
+      );
+    }
+  }
 }
