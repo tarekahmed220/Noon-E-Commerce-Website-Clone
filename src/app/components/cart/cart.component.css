@@ -1,0 +1,83 @@
+:root{
+  --colorBorder: #dadce3;
+  --colorText: #7e859b;
+  --colorTextGreen: #38ae04;
+  --colorBtnOrder: #3866df;
+}
+
+.offPrice{
+  color: #7e859b;
+  text-decoration: line-through;
+}
+.offRate{
+  font-size: 13px;
+  color: #38ae04;
+}
+.delivery{
+  height: 16px;
+  font-size: 12px;
+}
+.qty{
+  color: #7e859b;
+}
+
+
+/* Order Summary */
+.sectionOrder{
+  position: sticky;
+}
+
+.orderSummary{
+  border: 1px solid #dadce3;
+}
+
+.orderSummary form{
+  border: 1px solid #dadce3;
+  border-radius: 5px;
+}
+.orderSummary form input{
+  width: 85%;
+  border-radius: 5px;
+}
+.orderSummary form button{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+  color: white;
+}
+
+.viewOffers{
+  border: 1px solid #dadce3;
+}
+.viewOffers span{
+  font-size: 14px;
+}
+.imgChervon{
+  height: 22px;
+  width: 22px;
+}
+
+.textSub,
+.textShip{
+  color: #7e859b;
+}
+.textFree{
+  color: #38ae04;
+}
+
+.textTotal,
+.priceTotal{
+  color: #404553;
+}
+.inclusive{
+  color: #404553;
+}
+
+.textViewMore{
+  color: #f3ac30;
+  font-weight: 700;
+}
+
+.valuDiv{
+  border: 1px solid #00a19a;
+}
