@@ -7,6 +7,7 @@ import { ProductCartComponent } from './cart-product/cart-product.component';
   standalone: true,
   imports: [ProductCartComponent],
   templateUrl: './cart.component.html',
+
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {

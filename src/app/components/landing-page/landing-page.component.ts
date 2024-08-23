@@ -52,7 +52,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe(
         (response: ISomeProducts) => {
           this.powerbank = response.products;
-          console.log('powerbank', this.powerbank);
         },
         (error) => {
           console.error('Error fetching products:', error);
@@ -63,7 +62,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe(
         (response: ISomeProducts) => {
           this.allMobiles = response.products;
-          console.log('allMobiles', this.allMobiles);
         },
         (error) => {
           console.error('Error fetching products:', error);
@@ -74,7 +72,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe(
         (response: ISomeProducts) => {
           this.gaming = response.products;
-          console.log('gaming', this.gaming);
         },
         (error) => {
           console.error('Error fetching products:', error);
@@ -85,7 +82,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe(
         (response: ISomeProducts) => {
           this.recomendedforyou = response.products;
-          console.log('recomendedforyou', this.recomendedforyou);
         },
         (error) => {
           console.error('Error fetching products:', error);
@@ -96,7 +92,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe(
         (response: ISomeProducts) => {
           this.shirts = response.products;
-          console.log('shirts', this.shirts);
         },
         (error) => {
           console.error('Error fetching products:', error);

@@ -1,0 +1,176 @@
+<div class="container lg:w-[1440px] mb-5 mt-4">
+  <div class="header border-b-2 pb-4 flex justify-between">
+    <h1 class="font-semibold text-2xl">Wishlist</h1>
+
+    <button
+      (click)="openModal()"
+      class="font-semibold py-2 px-3 text-white bg-[#3866df]"
+    >
+      CREATE NEW WISHLIST
+    </button>
+  </div>
+  <!-- modal -->
+  @if (isModalOpen) {
+
+  <div
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+  >
+    <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h5 class="text-lg font-semibold">Create New Wishlist</h5>
+        <button
+          class="text-gray-500 hover:text-gray-700"
+          (click)="closeModal()"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="mt-4">
+        <form>
+          <div class="mb-4">
+            <label
+              for="wishlistName"
+              class="block text-sm font-medium text-gray-700"
+              >Wishlist Name</label
+            >
+            <input
+              #wishlistName
+              type="text"
+              id="wishlistName"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter wishlist name"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="flex justify-end mt-6">
+        <button
+          class="bg-gray-500 text-white font-bold py-2 px-4 rounded mr-2"
+          (click)="closeModal()"
+        >
+          Close
+        </button>
+        <button
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+          (click)="saveName(wishlistName.value)"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+  <!-- modal -->
+  <div class="body flex flex-col lg:flex-row min-h-9">
+    <div class="sidebar flex-1">
+      <div class="bg-[#ebecf0] py-3 pl-4">
+        <div class="flex">
+          <p class="font-semibold">default</p>
+          <span
+            class="ml-2 bg-[#3866df] text-white text-sm px-[11px] rounded-[13px] flex justify-center items-center"
+            >Default</span
+          >
+        </div>
+        <div class="my-3">
+          <span>{{ products.length }}</span> items
+          <i class="fa-solid fa-lock ml-1 text-[#404553]"></i>
+        </div>
+      </div>
+      @for (item of newWishList; track $index) {
+      <div class="py-3 pl-4 my-4 border">
+        <div class="flex">
+          <p class="font-semibold">{{ item }}</p>
+        </div>
+        <div class="my-3">
+          <span>No</span> items
+          <i class="fa-solid fa-lock ml-1 text-[#404553]"></i>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="default flex-[2] ml-4 border-l-2">
+      <div class="header pl-4 py-3 border-b border-gray-300">
+        <div class="flex justify-between">
+          <div class="flex">
+            <p class="font-semibold">default</p>
+            <span
+              class="ml-2 bg-[#3866df] text-white text-sm px-[11px] rounded-[13px] flex justify-center items-center"
+              >Default</span
+            >
+          </div>
+          <div class="share">
+            <div class="links flex gap-4">
+              <p class="py-1 px-4 border-gray-300 border-1 rounded-lg">
+                <i class="fa-solid fa-share-nodes text-gray-500"></i> Share
+              </p>
+              <p class="py-1 px-[34px] border-gray-300 border-1 rounded-lg">
+                More
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="listItems flex flex-wrap gap-4 justify-center items-center mt-3"
+      >
+        @for (product of products; track $index) {
+        <div
+          class="box w-64 h-90 border border-gray-300 rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+        >
+          <div class="img h-3/5 cursor-pointer" (click)="showDetails(product)">
+            <img
+              class="w-full h-full object-cover"
+              [src]="
+                product.image ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRABNkxFNOH2LwNqvrWyxMZkwa-3yp-4c5vRQ&s'
+              "
+              alt="{{ product.name }}"
+            />
+          </div>
+          <div class="details p-4 flex flex-col h-2/5">
+            <div class="icons flex justify-between items-center mb-2">
+              <span class="rate flex items-center">
+                <i class="fa-solid fa-star text-green-500 mx-1"></i>
+                {{ product.rate }}
+              </span>
+              <span
+                class="add-to-cart cursor-pointer"
+                (click)="addToCart(product)"
+              >
+                <i class="fa-solid fa-cart-plus text-xl"></i>
+              </span>
+            </div>
+
+            <div class="title text-start font-semibold line-clamp-2 mb-2">
+              {{ product.name }}
+            </div>
+            <div class="price text-start font-bold mb-2">
+              EGP {{ product.price }}
+            </div>
+            <div class="flex justify-between items-center text-start text-xs">
+              <p>
+                <i class="fa-solid fa-truck text-blue-500"></i>
+                Free Delivery
+              </p>
+              <span>
+                <img
+                  class="my-2"
+                  src="https://f.nooncdn.com/s/app/com/noon/images/fulfilment_express_v3-en.svg"
+                  alt="Delivery logo"
+                />
+              </span>
+            </div>
+            <button
+              class="bg-red-500 rounded-lg text-white cursor-pointer"
+              (click)="removeFromWishList(product)"
+            >
+              Remove <i class="fa-regular fa-trash-can ml-1"></i>
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

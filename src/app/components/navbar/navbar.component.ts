@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   showLinks: boolean = false;
   isLogin: boolean = false;
   cartCount: number = 0;
+  userName: string = 'guest';
 
   constructor(
     private router: Router,
@@ -35,6 +36,11 @@ export class NavbarComponent implements OnInit {
       if (this.isLogin) {
         this.fetchCartCount();
       }
+    });
+    this._authServe.getUserName().subscribe((response: any) => {
+      const theUserName = response.fullName;
+      const firstName = theUserName.split(' ')[0];
+      this.userName = firstName.toUpperCase();
     });
   }
 

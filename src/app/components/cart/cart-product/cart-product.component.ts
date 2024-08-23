@@ -1,6 +1,5 @@
-
 import { Component, Input, OnInit } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CartComponent } from '../cart.component';
 import { IProduct } from '../../../interface/IProduct';
 import { CartService } from '../../../Services/cart.service';
@@ -8,14 +7,16 @@ import { CartService } from '../../../Services/cart.service';
 @Component({
   selector: 'app-cart-product',
   standalone: true,
-  imports: [CartComponent,FormsModule],
+  imports: [CartComponent, FormsModule],
   templateUrl: './cart-product.component.html',
-  styleUrl: './cart-product.component.css'
+  styleUrl: './cart-product.component.css',
 })
+
 export class ProductCartComponent implements OnInit{
 
   products: any;
   constructor(private cartServ: CartService){}
+
 
   ngOnInit(): void {
     this.cartServ.cartProduct$.subscribe(products => {
@@ -23,6 +24,7 @@ export class ProductCartComponent implements OnInit{
       console.log(products);
     })
   }
+
 
   removeProduct(productId: number): void {
     console.log(productId);
@@ -34,6 +36,7 @@ export class ProductCartComponent implements OnInit{
         console.error('Error removing product from cart:', error);
       }
     );
+
   }
 
   // updateQuantity(product: any, event: Event): void {
@@ -57,6 +60,7 @@ export class ProductCartComponent implements OnInit{
     if (target) {
       const value = parseInt(target.value, 10);
       if (!isNaN(value) && value > 0) {
+
         this.cartServ.updateProductQuantity(product._id, value).subscribe(
           () => {
             product.quantity = value;
@@ -74,6 +78,7 @@ export class ProductCartComponent implements OnInit{
             console.error('Error updating product quantity:', error);
           }
         );
+
       }
     }
   }
@@ -88,6 +93,7 @@ export class ProductCartComponent implements OnInit{
     const discount = ((originalPrice - currentPrice) / originalPrice) * 100;
     return Math.ceil(discount);
   }
+
 
 }
 ////////////////////////////

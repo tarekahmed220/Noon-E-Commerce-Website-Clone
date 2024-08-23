@@ -7,6 +7,7 @@ import { IProduct } from '../interface/IProduct';
   providedIn: 'root',
 })
 export class CartService {
+
   private cartCountSubject = new BehaviorSubject<number>(0);
   private cartProductsSubject = new BehaviorSubject<any[]>([]);
 
@@ -95,15 +96,18 @@ export class CartService {
         this.fetchCartProducts().subscribe();
       })
     );
+
   }
 
   getTotalItems(): number {
     return this.cartProductsSubject.value.length;
   }
 
+
   getSubTotal(): number {
     return this.cartProductsSubject.value.reduce((total, product) => total + parseFloat(product.productId.price.replace(/[^\d.]/g, '')) * product.quantity, 0);
   }
+
 
   getTotalPrice(): number {
     return this.getSubTotal();
