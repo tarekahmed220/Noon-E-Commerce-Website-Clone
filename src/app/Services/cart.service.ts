@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { IProduct } from '../interface/IProduct';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,7 @@ export class CartService {
 
   private cartCountSubject = new BehaviorSubject<number>(0);
   private cartProductsSubject = new BehaviorSubject<any[]>([]);
+  couponsCode: string[] = ["ahmed22","tarek5"];
 
   constructor(private http: HttpClient) {
     this.fetchCartCount().subscribe(); // Fetch cart count on service initialization
@@ -111,5 +112,17 @@ export class CartService {
 
   getTotalPrice(): number {
     return parseFloat(this.getSubTotal().toFixed(2));
+  }
+
+  getTotalPriceAfterCoupon(coupon: string): number{
+    switch(coupon){
+      case "ahmed22":
+        return this.getTotalPrice() - 300;
+      case "tarek5":
+        return this.getTotalPrice() - 200;
+      default:
+        console.log("not found coupon");
+        return this.getTotalPrice();
+    }
   }
 }

@@ -15,6 +15,7 @@ import { CartService } from '../../../Services/cart.service';
 export class ProductCartComponent implements OnInit{
 
   products: any;
+  showToast:boolean = false;
   constructor(private cartServ: CartService){}
 
 
@@ -23,6 +24,8 @@ export class ProductCartComponent implements OnInit{
       this.products = products;
       console.log(products);
     })
+    console.log(this.showToast);
+
   }
 
 
@@ -36,6 +39,15 @@ export class ProductCartComponent implements OnInit{
         console.error('Error removing product from cart:', error);
       }
     );
+
+    this.showToast = true;
+
+    setTimeout(()=>{
+      this.showToast = false;
+      console.log(this.showToast);
+    },3000);
+
+    console.log(this.showToast);
 
   }
 

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductCartComponent } from './cart-product/cart-product.component';
-import { ProductsComponent } from '../products/products.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [ProductCartComponent],
+  imports: [ProductCartComponent,FormsModule],
   templateUrl: './cart.component.html',
 
   styleUrls: ['./cart.component.css']
@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   totalItems: number = 0;
   subTotal: number = 0;
   totalPrice: number = 0;
+  couponCode: string = ''; // تأكد من تعريف المتغير هنا
 
   constructor(private cartServ: CartService) {}
 
@@ -34,6 +35,10 @@ export class CartComponent implements OnInit {
 
   updateCartDetails(): void {
     this.subTotal = this.cartServ.getSubTotal();
-    this.totalPrice = this.cartServ.getTotalPrice();
+    this.applyCoupon()
+  }
+
+  applyCoupon(){
+    this.totalPrice = this.cartServ.getTotalPriceAfterCoupon(this.couponCode);
   }
 }
