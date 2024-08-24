@@ -4,11 +4,12 @@ import { IProduct } from '../../interface/IProduct';
 import { Router } from '@angular/router';
 import { CartService } from '../../Services/cart.service';
 import { AuthService } from '../../Services/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [],
+  imports: [MatSnackBarModule],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css',
   template: `
@@ -44,7 +45,8 @@ export class WishlistComponent implements OnInit {
     private _productServ: FavoriteProductService,
     private router: Router,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -62,18 +64,20 @@ export class WishlistComponent implements OnInit {
   addToCart(product: IProduct) {
     if (!this.isLogin) {
       this.router.navigate(['/signin']);
+      this.showError();
+
       return;
     }
 
     this.cartService.addProductToCart(product._id, 1);
+    this.showSuccess();
   }
   removeFromWishList(product: IProduct) {
-    console.log(product._id);
     this._productServ
       .removeFromWishlist(product._id)
       .subscribe((response: any) => {
-        console.log(response);
         this.products = this.products.filter((p) => p._id !== product._id);
+        this.showSuccess();
       });
   }
   openModal() {
@@ -86,5 +90,19 @@ export class WishlistComponent implements OnInit {
   saveName(inputvalue: string) {
     this.newWishList.push(inputvalue);
     this.closeModal();
+    this.showSuccess();
+  }
+  showSuccess() {
+    this.snackBar.open('تمت العملية بنجاح!', 'إغلاق', {
+      duration: 3000,
+      panelClass: ['success-snackbar'],
+    });
+  }
+
+  showError() {
+    this.snackBar.open('حدث خطأ ما!', 'إغلاق', {
+      duration: 3000,
+      panelClass: ['error-snackbar'],
+    });
   }
 }

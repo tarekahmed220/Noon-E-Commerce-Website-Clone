@@ -26,6 +26,7 @@ export const routes: Routes = [
       { path: 'productDetails', component: ProductDetailsComponent },
       { path: 'verify/:token', component: ConfirmEmailComponent },
       { path: 'cart', component: CartComponent },
+
       { path: 'wishlist', component: WishlistComponent },
       { path: 'showDetails/:id', component: ProductDetailsComponent },
 
