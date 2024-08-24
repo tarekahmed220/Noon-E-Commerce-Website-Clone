@@ -12,6 +12,7 @@ import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -25,8 +26,8 @@ export const routes: Routes = [
       { path: 'pressreset-password/:token', component: NewPasswordComponent }, //for new password
       { path: 'productDetails', component: ProductDetailsComponent },
       { path: 'verify/:token', component: ConfirmEmailComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'wishlist', component: WishlistComponent },
+      { path: 'cart', component: CartComponent , canActivate:[AuthGuard]},
+      { path: 'wishlist', component: WishlistComponent,canActivate:[AuthGuard] },
       { path: 'showDetails/:id', component: ProductDetailsComponent },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' },
