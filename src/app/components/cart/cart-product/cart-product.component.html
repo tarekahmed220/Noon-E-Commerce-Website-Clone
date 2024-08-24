@@ -3,11 +3,11 @@
   <section class="rounded-lg flex p-2 gap-5 mb-3 bg-white">
     <div class="flex-1 flex items-center">
       <figure class="w-1/4">
-        <img class="w-[120px]" [src]="product.imageUrl" alt="Product Image" />
+        <img class="w-[120px]" [src]="product.productId.image" alt="Product Image" />
       </figure>
       <div class="w-3/4 ml-3">
         <p class="text-[14px] font-bold">
-          {{product.name}}
+          {{product.productId.name}}
         </p>
         <div class="text-[14px] mt-2">
           <p class="mt-2 text-gray-600">Order in 10 h 27 m</p>
@@ -17,20 +17,22 @@
           <img src="/images/cartImages/non_returnable.svg" alt="Non Returnable" />
           <p class="text-gray-600">This item cannot be exchanged or returned.</p>
         </div>
-        <button class="px-2 py-1 mt-3 text-[#7e859b] border border-gray-300 hover:bg-red-200 rounded flex items-center gap-2" (click)="removeProduct(product.id)">
+        <button class="px-2 py-1 mt-3 text-[#7e859b] border border-gray-300 hover:bg-red-200 rounded flex items-center gap-2" (click)="removeProduct(product.productId._id)">
           <img src="/images/cartImages/trash.svg" alt="Remove" /> Remove
         </button>
       </div>
     </div>
     <div class="w-1/4 flex flex-col justify-between text-right">
       <div>
-        <p class="font-bold">EGP <strong class="text-lg">{{getPriceAsNumber(product.price)}}</strong></p>
-        <p class="off text-gray-500">
-          <span class="line-through me-1">{{getPriceAsNumber(product.originalPrice)}}</span>
-          <span class="text-[#38ae04] text-[13px] font-bold">17% OFF</span>
-        </p>
+        <p class="font-bold">EGP <strong class="text-lg">{{getPriceAsNumber(product.productId.price)}}</strong></p>
+        @if(product.productId.onSale){
+          <p class="off text-gray-500">
+            <span class="line-through me-1">{{getPriceAsNumber(product.productId.priceBeforeSale)}}</span>
+            <span class="text-[#38ae04] text-[13px] font-bold">{{calculateDiscount(product.productId.price,product.productId.priceBeforeSale)}}% OFF</span>
+          </p>
+        }
         <div class="my-2">
-          <img src="/images/cartImages/fulfilment_express_v3-en.svg" alt="Express Delivery" />
+          <img class="ml-auto" src="/images/cartImages/fulfilment_express_v3-en.svg" alt="Express Delivery" />
         </div>
         <div class="text-[12px] h-4 flex justify-end items-center gap-2">
           <img class="h-5" src="/images/cartImages/van-en.png" alt="Van" />
@@ -39,7 +41,7 @@
       </div>
       <div class="flex justify-end items-center gap-3 mt-4">
         <span class="text-gray-600">Qty</span>
-        <input class="w-16 border border-gray-300 rounded text-center" type="number"[min]="0" [value]="product.quantity" (input)="updateQuantity(product, $event)" />
+        <input class="w-16 border border-gray-300 rounded text-center" type="number"[min]="1" [value]="product.quantity" (input)="updateQuantity(product.productId, $event)" />
       </div>
     </div>
   </section>

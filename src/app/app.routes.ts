@@ -11,6 +11,7 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/cart/cart.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'productDetails', component: ProductDetailsComponent },
       { path: 'verify/:token', component: ConfirmEmailComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'wishlist', component: WishlistComponent },
       { path: 'showDetails/:id', component: ProductDetailsComponent },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' },
