@@ -25,13 +25,12 @@ export const routes: Routes = [
       { path: 'productDetails', component: ProductDetailsComponent },
       { path: 'verify/:token', component: ConfirmEmailComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'product/:id', component: ProductDetailsComponent },
+      { path: 'showDetails/:id', component: ProductDetailsComponent },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', component: PagenotfoundComponent },
     ],
   },
-
 ];
 
 @NgModule({
