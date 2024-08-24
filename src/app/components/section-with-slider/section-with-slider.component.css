@@ -50,11 +50,15 @@
   font-size: 18px;
 }
 .success-snackbar {
-  background-color: #4caf50;
-  color: white;
+  background-color: #4caf50 !important;
+  color: white !important;
 }
 
 .error-snackbar {
-  background-color: #f44336;
-  color: white;
+  background-color: #f44336 !important;
+  color: white !important;
+}
+.success {
+  background-color: #4caf50 !important;
+  color: white !important;
 }
