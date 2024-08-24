@@ -20,7 +20,6 @@ import { LayoutComponent } from './components/layout/layout.component';
     ProductDetailsComponent,
 
     LayoutComponent,
-
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

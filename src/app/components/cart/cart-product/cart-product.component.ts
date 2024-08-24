@@ -3,40 +3,37 @@ import { FormsModule } from '@angular/forms';
 import { CartComponent } from '../cart.component';
 import { IProduct } from '../../../interface/IProduct';
 import { CartService } from '../../../Services/cart.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart-product',
   standalone: true,
-  imports: [CartComponent, FormsModule],
+  imports: [CartComponent, FormsModule, MatSnackBarModule],
   templateUrl: './cart-product.component.html',
   styleUrl: './cart-product.component.css',
 })
-
-export class ProductCartComponent implements OnInit{
-
+export class ProductCartComponent implements OnInit {
   products: any;
-  constructor(private cartServ: CartService){}
-
+  constructor(private cartServ: CartService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.cartServ.cartProduct$.subscribe(products => {
+    this.cartServ.cartProduct$.subscribe((products) => {
       this.products = products;
       console.log(products);
-    })
+    });
   }
-
 
   removeProduct(productId: number): void {
     console.log(productId);
     this.cartServ.removeFromCart(productId.toString()).subscribe(
       () => {
         console.log('Product removed successfully');
+        this.showSuccess();
       },
       (error) => {
         console.error('Error removing product from cart:', error);
       }
     );
-
   }
 
   // updateQuantity(product: any, event: Event): void {
@@ -60,7 +57,6 @@ export class ProductCartComponent implements OnInit{
     if (target) {
       const value = parseInt(target.value, 10);
       if (!isNaN(value) && value > 0) {
-
         this.cartServ.updateProductQuantity(product._id, value).subscribe(
           () => {
             product.quantity = value;
@@ -69,7 +65,7 @@ export class ProductCartComponent implements OnInit{
             console.error('Error updating product quantity:', error);
           }
         );
-      } else if(!isNaN(value) && value === 0){
+      } else if (!isNaN(value) && value === 0) {
         this.cartServ.updateProductQuantity(product._id, 0).subscribe(
           () => {
             this.removeProduct(product._id);
@@ -78,7 +74,6 @@ export class ProductCartComponent implements OnInit{
             console.error('Error updating product quantity:', error);
           }
         );
-
       }
     }
   }
@@ -93,9 +88,18 @@ export class ProductCartComponent implements OnInit{
     const discount = ((originalPrice - currentPrice) / originalPrice) * 100;
     return Math.ceil(discount);
   }
+  showSuccess() {
+    this.snackBar.open('تمت العملية بنجاح!', 'إغلاق', {
+      duration: 3000,
+      panelClass: ['success-snackbar'],
+    });
+  }
 
-
+  showError() {
+    this.snackBar.open('حدث خطأ ما!', 'إغلاق', {
+      duration: 3000,
+      panelClass: ['error-snackbar'],
+    });
+  }
 }
 ////////////////////////////
-
-

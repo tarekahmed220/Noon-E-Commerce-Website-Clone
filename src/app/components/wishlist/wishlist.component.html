@@ -1,17 +1,18 @@
 <div class="container lg:w-[1440px] mb-5 mt-4">
-  <div class="header border-b-2 pb-4 flex justify-between">
-    <h1 class="font-semibold text-2xl">Wishlist</h1>
+  <div
+    class="header border-b-2 pb-4 flex justify-between flex-col md:flex-row items-center"
+  >
+    <h1 class="font-semibold !text-2xl">Wishlist</h1>
 
     <button
       (click)="openModal()"
-      class="font-semibold py-2 px-3 text-white bg-[#3866df]"
+      class="font-semibold py-2 px-3 text-white bg-[#3866df] h-[50%] rounded-md"
     >
       CREATE NEW WISHLIST
     </button>
   </div>
   <!-- modal -->
   @if (isModalOpen) {
-
   <div
     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
   >
@@ -67,7 +68,7 @@
         <div class="flex">
           <p class="font-semibold">default</p>
           <span
-            class="ml-2 bg-[#3866df] text-white text-sm px-[11px] rounded-[13px] flex justify-center items-center"
+            class="ml-2 bg-[#3866df] text-white text-[10px] px-[9px] h-[50%] rounded-[13px] flex justify-center items-center"
             >Default</span
           >
         </div>
@@ -94,12 +95,12 @@
           <div class="flex">
             <p class="font-semibold">default</p>
             <span
-              class="ml-2 bg-[#3866df] text-white text-sm px-[11px] rounded-[13px] flex justify-center items-center"
+              class="ml-2 bg-[#3866df] text-white text-[10px] px-[9px] h-[50%] rounded-[13px] flex justify-center items-center"
               >Default</span
             >
           </div>
           <div class="share">
-            <div class="links flex gap-4">
+            <div class="links md:flex gap-4 hidden">
               <p class="py-1 px-4 border-gray-300 border-1 rounded-lg">
                 <i class="fa-solid fa-share-nodes text-gray-500"></i> Share
               </p>
@@ -114,7 +115,9 @@
       <div
         class="listItems flex flex-wrap gap-4 justify-center items-center mt-3"
       >
-        @for (product of products; track $index) {
+        @if (products.length ==0) {
+        <p>There is no products yet please add some ❤️</p>
+        }@else { @for (product of products; track $index) {
         <div
           class="box w-64 h-90 border border-gray-300 rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg"
         >
@@ -169,7 +172,7 @@
             </button>
           </div>
         </div>
-        }
+        } }
       </div>
     </div>
   </div>
