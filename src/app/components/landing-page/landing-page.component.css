@@ -11,3 +11,7 @@
     height: auto;
   }
 }
+h2 {
+  font-size: 23px !important;
+  font-weight: bold;
+}

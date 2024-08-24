@@ -86,6 +86,7 @@ export class SectionWithSliderComponent implements OnChanges, OnInit {
 
   addToCart(product: IProduct) {
     if (!this.isLogin) {
+      this.showError();
       this.router.navigate(['/signin']);
       return;
     }
@@ -104,7 +105,7 @@ export class SectionWithSliderComponent implements OnChanges, OnInit {
   }
 
   showError() {
-    this.snackBar.open('حدث خطأ ما!', 'إغلاق', {
+    this.snackBar.open('من فضلك سجل دخول اولا⚠️ا', 'إغلاق', {
       duration: 3000,
       panelClass: ['error-snackbar'],
     });
