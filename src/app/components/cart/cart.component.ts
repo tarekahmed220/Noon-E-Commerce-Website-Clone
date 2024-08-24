@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductCartComponent } from './cart-product/cart-product.component';
+import { ProductsComponent } from '../products/products.component';
 
 @Component({
   selector: 'app-cart',
@@ -21,6 +22,8 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     // اشتراك في تحديثات عدد المنتجات
     this.cartServ.cartCount$.subscribe(count => this.totalItems = count);
+    console.log(this.products);
+
 
     // اشتراك في تحديثات المنتجات
     this.cartServ.cartProduct$.subscribe(products => {

@@ -110,7 +110,6 @@ export class CartService {
 
 
   getTotalPrice(): number {
-    return this.getSubTotal();
+    return parseFloat(this.getSubTotal().toFixed(2));
   }
-
 }

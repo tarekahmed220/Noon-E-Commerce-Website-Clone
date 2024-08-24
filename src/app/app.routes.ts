@@ -12,6 +12,7 @@ import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ProductsComponent } from './components/products/products.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'wishlist', component: WishlistComponent },
       { path: 'showDetails/:id', component: ProductDetailsComponent },
+      { path: 'allProducts', component: ProductsComponent },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', component: PagenotfoundComponent },
