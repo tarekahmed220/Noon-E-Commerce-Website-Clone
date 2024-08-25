@@ -14,7 +14,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class ProductCartComponent implements OnInit {
   products: any;
-  constructor(private cartServ: CartService, private snackBar: MatSnackBar) {}
+  showToast:boolean = false;
+  constructor(private cartServ: CartService, private snackBar: MatSnackBar){}
+
+
 
   ngOnInit(): void {
     this.cartServ.cartProduct$.subscribe((products) => {
@@ -34,6 +37,17 @@ export class ProductCartComponent implements OnInit {
         console.error('Error removing product from cart:', error);
       }
     );
+
+
+    this.showToast = true;
+
+    setTimeout(()=>{
+      this.showToast = false;
+      console.log(this.showToast);
+    },3000);
+
+    console.log(this.showToast);
+
   }
 
   // updateQuantity(product: any, event: Event): void {
