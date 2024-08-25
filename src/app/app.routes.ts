@@ -14,7 +14,9 @@ import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthGuard } from './Services/authGuard';
-
+import { PaymentComponent } from './components/payment/payment.component';
+import { SuccessComponent } from './components/payment/success/success.component';
+import { FailiureComponent } from './components/payment/failiure/failiure.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +31,21 @@ export const routes: Routes = [
       { path: 'productDetails', component: ProductDetailsComponent },
       { path: 'verify/:token', component: ConfirmEmailComponent },
       { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+      {
+        path: 'checkout',
+        component: PaymentComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'success',
+        component: SuccessComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'failure',
+        component: FailiureComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'wishlist',
         component: WishlistComponent,

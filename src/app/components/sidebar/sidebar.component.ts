@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { AllProductsService } from '../../Services/all-products.service';
 import { BehaviorSubject, map } from 'rxjs';
@@ -8,7 +7,7 @@ import { BehaviorSubject, map } from 'rxjs';
   standalone: true,
   imports: [],
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
   allProducts: any;
@@ -19,22 +18,25 @@ export class SidebarComponent implements OnInit {
   constructor(private allProductsServ: AllProductsService) {}
 
   ngOnInit(): void {
-    this.allProductsServ.allSubCategoryFn.pipe(
-      map((sub: Record<string, any>) => sub['subcategories']) // استخدام Record<string, any>
-    ).subscribe(items => {
-      this.allSubCategory = items;
-      console.log(this.allSubCategory); // سجل البيانات بعد التحديث
-    });
+    this.allProductsServ.allSubCategoryFn
+      .pipe(map((sub: Record<string, any>) => sub['subcategories']))
+      .subscribe((items) => {
+        this.allSubCategory = items;
+        console.log(this.allSubCategory);
+      });
 
     // اشتراك في التغييرات على subCategoryId$ لاستخراج المنتجات الجديدة
-    this.subCategoryId$.subscribe(subCategoryId => {
-      this.allProductsServ.fetctProductsSubCategory(subCategoryId).pipe(
-        map((sub: Record<string, any>) => sub['products'] || []) // استخدام Record<string, any>
-      ).subscribe(items => {
-        this.allPorductsSubCategory = items;
-        this.allProductsServ.setProductsTest(this.allPorductsSubCategory);
-        console.log(this.allPorductsSubCategory); // سجل البيانات بعد التحديث
-      });
+    this.subCategoryId$.subscribe((subCategoryId) => {
+      this.allProductsServ
+        .fetctProductsSubCategory(subCategoryId)
+        .pipe(
+          map((sub: Record<string, any>) => sub['products'] || []) // استخدام Record<string, any>
+        )
+        .subscribe((items) => {
+          this.allPorductsSubCategory = items;
+          this.allProductsServ.setProductsTest(this.allPorductsSubCategory);
+          console.log(this.allPorductsSubCategory); // سجل البيانات بعد التحديث
+        });
     });
 
     this.allProducts = this.allProductsServ.getProductsTest();
@@ -43,11 +45,9 @@ export class SidebarComponent implements OnInit {
   onCheckboxChange(event: Event, subCategoryId: string): void {
     const isChecked = (event.target as HTMLInputElement).checked; // التحقق من حالة الـ checkbox
     if (isChecked) {
-      console.log(subCategoryId);
       this.subCategoryId$.next(subCategoryId); // تحديث BehaviorSubject لتغيير subCategoryId
     } else {
-      console.log(subCategoryId);
-      this.allPorductsSubCategory = []; // تحديث المنتجات عندما يتم إلغاء تحديد الفئة الفرعية
+      this.allPorductsSubCategory = [];
       this.allProductsServ.setProductsTest(this.allPorductsSubCategory); // تأكد من تحديث BehaviorSubject هنا أيضًا
     }
   }

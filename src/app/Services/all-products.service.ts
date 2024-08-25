@@ -44,6 +44,7 @@ import { tap } from 'rxjs/operators';
 export class AllProductsService {
   private allSubCategory = new BehaviorSubject<[]>([]);
   private productsSubCategory = new BehaviorSubject<[]>([]);
+  private searchValue = new BehaviorSubject<string>('');
 
   api: string = 'http://localhost:4000/getallproduct';
   allProducts = new BehaviorSubject([]);
@@ -51,6 +52,8 @@ export class AllProductsService {
   constructor(public http: HttpClient) {
     this.fetchAllSubCategory().subscribe();
   }
+
+  currentSearchValue = this.searchValue.asObservable();
 
   get AllProducts(): Observable<any> {
     return this.http.get<any>(this.api);
@@ -78,16 +81,27 @@ export class AllProductsService {
     return this.productsSubCategory.asObservable();
   }
 
-  fetctProductsSubCategoryBySearch(searchItem: any): Observable<[]> {
+  fetctProductsSubCategoryBySearch(searchItem: string): Observable<[]> {
     return this.http
-      .get<[]>(
-        `http://localhost:4000/getallproduct/?keyword=${searchItem}`
-      )
+      .get<[]>(`http://localhost:4000/getallproduct/?keyword=${searchItem}`)
       .pipe(tap((products) => this.productsSubCategory.next(products)));
   }
 
+  fetctProductsByPagination(page: number, limit: number = 15): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    return this.http
+      .get<any>('http://localhost:4000/getallproduct', { params })
+      .pipe(
+        tap((response) => {
+          this.productsSubCategory.next(response.products); // تحديث الـ BehaviorSubject بالمنتجات الجديدة
+        })
+      );
+  }
+
   get productsSubCategoryBySearchFn(): Observable<[]> {
-    console.log();
     return this.productsSubCategory.asObservable();
   }
 
@@ -101,5 +115,9 @@ export class AllProductsService {
 
   getProductsTest(): Observable<any[]> {
     return this.subCategoryProducts.asObservable(); // العودة إلى BehaviorSubject كمراقب
+  }
+
+  changeSearchvalue(data: string) {
+    this.searchValue.next(data);
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ISigninUser } from '../../interface/ISignInUser';
 import { CommonModule } from '@angular/common';
@@ -12,10 +12,14 @@ import { AuthService } from '../../Services/auth.service';
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   constructor(private _authServ: AuthService, private router: Router) {}
   errorMsg: string = '';
   signinData: ISigninUser = {} as ISigninUser;
+
+  ngOnInit(): void {
+    document.body.scrollTop = 0;
+  }
 
   onLogin() {
     console.log('done');

@@ -1,32 +1,51 @@
 <div class="p-4 w-64 bg-gray-100">
-  <!-- عنوان الفئة الفرعية وزر التبديل -->
   <div class="flex justify-between items-center mb-4">
-    <h3 class="text-lg font-semibold">Sub Category</h3>
+    <h3 class="!text-lg !font-semibold">Sub Category</h3>
     <button>
-      <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      <svg
+        class="w-4 h-4 transform rotate-180"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        ></path>
       </svg>
     </button>
   </div>
 
-  <!-- مربع البحث -->
   <div class="mb-4">
-    <input type="text" placeholder="Search" class="w-full p-2 border border-gray-300 rounded">
+    <input
+      type="text"
+      placeholder="Search"
+      class="w-full p-2 border border-gray-300 rounded"
+    />
   </div>
 
-  <!-- قائمة الفئات الفرعية -->
   <div class="space-y-2">
-      @for (subCategory of allSubCategory; track $index) {
-      <div class="flex items-center">
-        <input
-          type="checkbox"
-          class="form-checkbox text-blue-500"
-          (change)="onCheckboxChange($event, subCategory._id)"> <!-- معالج الحدث -->
-        <label class="ml-2 text-gray-700">
-          {{subCategory.name}}
-          <!-- <span class="text-gray-500">({{subCategory.productCount || 0}})</span> عرض عدد المنتجات -->
-        </label>
-      </div>
+    @for (subCategory of allSubCategory; track $index) {
+    <div class="flex items-center">
+      <input
+        id="subCategoryInput_{{ subCategory._id }}"
+        type="radio"
+        name="subCategory"
+        [value]="subCategory._id"
+        (change)="onCheckboxChange($event, subCategory._id)"
+      />
+      <!-- معالج الحدث -->
+      <label
+        class="ml-2 text-gray-700"
+        for="subCategoryInput_{{ subCategory._id }}"
+      >
+        {{ subCategory.name }}
+        <!-- <span class="text-gray-500">({{subCategory.productCount || 0}})</span> عرض عدد المنتجات -->
+      </label>
+    </div>
     }
   </div>
 

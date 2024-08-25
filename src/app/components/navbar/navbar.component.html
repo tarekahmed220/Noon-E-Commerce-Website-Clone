@@ -35,15 +35,21 @@
       </div>
     </div>
   </div>
-  <input
-    class="flex-1 rounded pl-1 sm:px-3 py-2 border-none outline-none text-[#646874]"
-    type="text"
-    name="searchInput"
-    id="searchInput"
-    required
-    pattern="^[A-Za-z0-9\s]+$"
-    placeholder="What are you looking for?"
-  />
+  <div class="relative flex-1">
+    <input
+      [(ngModel)]="inputValue"
+      class="w-full rounded pl-1 sm:px-3 py-2 border-none outline-none text-[#646874]"
+      type="text"
+      name="searchInput"
+      id="searchInput"
+      required
+      pattern="^[A-Za-z0-9\s]+$"
+      placeholder="What are you looking for?"
+    />
+    <span class="searchIcon absolute top-1/2 right-0" (click)="onSearch()"
+      ><i class="fa-solid fa-magnifying-glass"></i
+    ></span>
+  </div>
   <ul class="mainSections justify-center items-center gap-2 hidden lg:flex">
     <li class="language px-3 custom-border-right">العربية</li>
     @if(!isLogin){
@@ -192,22 +198,22 @@
   class="subNav h-[44px] bg-[#fcfbf4] font-semibold flex justify-center sm:justify-start"
 >
   <div
-    class="allCategory ml-[10px] pl-[15px] w-[216px] text-[#3866df] flex justify-between items-center cursor-pointer relative"
+    class="allCategory ml-[10px] pl-[15px] w-[216px] text-[#3866df] flex !justify-between !items-center cursor-pointer relative"
   >
     <p class="!w-full sm:w-[216px]">All CATEGORYIES</p>
     <i class="fa-solid fa-sort-down mr-4 mb-[7px] text-[20px]"></i>
   </div>
 
   <ul class="subCategory items-center h-full flex">
-    <li class="!hidden sm:!flex">ELECTRONICS</li>
-    <li class="!hidden sm:!flex">MOBILES</li>
-    <li class="!hidden sm:!flex">MEN</li>
-    <li class="!hidden lg:!flex">WOMEN</li>
-    <li class="!hidden md:!flex">HOME</li>
-    <li class="!hidden xl:!flex">BEAUTY & HEALTH</li>
-    <li class="!hidden xl:!flex">BABY & TOYS</li>
-    <li class="!hidden lg:!flex">SUPERMARKET</li>
-    <li class="!hidden xl:!flex">SELL ON NOON</li>
-    <li class="!hidden md:!flex">DEALS</li>
+    <li routerLink="allProducts" class="!hidden sm:!flex">ELECTRONICS</li>
+    <li routerLink="allProducts" class="!hidden sm:!flex">MOBILES</li>
+    <li routerLink="allProducts" class="!hidden sm:!flex">MEN</li>
+    <li routerLink="allProducts" class="!hidden lg:!flex">WOMEN</li>
+    <li routerLink="allProducts" class="!hidden md:!flex">HOME</li>
+    <li routerLink="allProducts" class="!hidden xl:!flex">BEAUTY & HEALTH</li>
+    <li routerLink="allProducts" class="!hidden xl:!flex">BABY & TOYS</li>
+    <li routerLink="allProducts" class="!hidden lg:!flex">SUPERMARKET</li>
+    <li routerLink="allProducts" class="!hidden xl:!flex">SELL ON NOON</li>
+    <li routerLink="allProducts" class="!hidden md:!flex">DEALS</li>
   </ul>
 </div>

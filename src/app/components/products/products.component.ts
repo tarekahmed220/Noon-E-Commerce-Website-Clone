@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AllProductsService } from '../../Services/all-products.service';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCarouselConfig,
+  NgbPaginationModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { FavoriteProductService } from '../../Services/product.service';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
 import { IProduct } from '../../interface/IProduct';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { map } from 'rxjs';
-
+import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [RouterLink,SidebarComponent],
+  imports: [RouterLink, SidebarComponent, NgbPaginationModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
   allProducts: any[] = [];
   filteredProducts: any[] = [];
-  subCategoryId!:string
-  allSubCategory: any[] = []; // أو استخدم الواجهة المناسبة
-
+  subCategoryId!: string;
+  allSubCategory: any[] = [];
+  currentPage: BehaviorSubject<number> = new BehaviorSubject(1);
+  page: number = 1;
+  totalItems = 200;
+  itemsPerPage = 15;
   isFavorite: boolean = false;
   isLogin: boolean = false;
-
+  receivedData: string = '';
 
   constructor(
     config2: NgbCarouselConfig,
@@ -42,27 +47,45 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // search
+    this.allProductsServ.currentSearchValue.subscribe((data) => {
+      this.receivedData = data;
+      this.allProductsServ
+        .fetctProductsSubCategoryBySearch(this.receivedData)
+        .subscribe((response: any) => {
+          console.log('data from search', response);
+          this.allProducts = response.products;
+          this.totalItems = response.total;
+        });
+    });
+
     this.authService.isLogin.subscribe((isLoggedIn) => {
       this.isLogin = isLoggedIn;
     });
 
-    this.allProductsServ.getProductsTest().subscribe(items => {
+    this.currentPage.subscribe((newPage) => {
+      console.log(newPage);
+      this.allProductsServ
+        .fetctProductsByPagination(newPage)
+        .subscribe((response) => {
+          this.totalItems = response.total;
+          this.allProducts = response.products;
+        });
+    });
+
+    this.allProductsServ.getProductsTest().subscribe((items) => {
       if (items.length === 0) {
         // إذا كانت القائمة فارغة، احصل على جميع المنتجات
-        this.allProductsServ.AllProducts.subscribe(allProducts => {
-          if(allProducts){
+        this.allProductsServ.AllProducts.subscribe((allProducts) => {
+          if (allProducts) {
             this.allProducts = allProducts[0].products;
-            console.log('All products loaded:', this.allProducts);
           }
         });
       } else {
         this.allProducts = items;
-        console.log('Received products:', this.allProducts);
       }
     });
   }
-
-
 
   toggleFavorite(product: any) {
     console.log(this.isLogin);
@@ -93,5 +116,7 @@ export class ProductsComponent implements OnInit {
     this.router.navigate([`/showDetails/${product._id}`]);
   }
 
-
+  onPageChange(page: number) {
+    this.currentPage.next(page);
+  }
 }
