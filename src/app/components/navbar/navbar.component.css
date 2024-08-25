@@ -143,3 +143,13 @@ ngb-carousel {
     width: 200%;
   }
 }
+
+.searchIcon {
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.searchIcon i {
+  color: rgba(128, 128, 128, 0.527);
+}

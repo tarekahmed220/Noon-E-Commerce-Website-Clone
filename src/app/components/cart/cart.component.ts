@@ -4,7 +4,8 @@ import { ProductCartComponent } from './cart-product/cart-product.component';
 import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from '../products/products.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { PaymentService } from '../../Services/payment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -22,19 +23,20 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
   couponCode: string = ''; // تأكد من تعريف المتغير هنا
 
-  constructor(private cartServ: CartService, private snackBar: MatSnackBar) {}
+  constructor(
+    private cartServ: CartService,
+    private snackBar: MatSnackBar,
+    private _paymentServ: PaymentService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // اشتراك في تحديثات عدد المنتجات
-    this.cartServ.cartCount$.subscribe(count => this.totalItems = count);
+    this.cartServ.cartCount$.subscribe((count) => (this.totalItems = count));
     console.log(this.products);
 
-
-
-    // اشتراك في تحديثات المنتجات
     this.cartServ.cartProduct$.subscribe((products) => {
       this.products = products;
-      this.updateCartDetails(); // تحديث تفاصيل السلة عند تحديث المنتجات
+      this.updateCartDetails();
     });
   }
 
@@ -58,5 +60,16 @@ export class CartComponent implements OnInit {
       duration: 3000,
       panelClass: ['error-snackbar'],
     });
+  }
+
+  checkout() {
+    const orderSummary = [
+      { totalPrice: this.totalPrice },
+      { products: this.products },
+      { subTotal: this.subTotal },
+      { productLength: this.products.length },
+    ];
+    this._paymentServ.onOrderChange(orderSummary);
+    this.router.navigate(['checkout']);
   }
 }

@@ -6,11 +6,13 @@ import { SubSliderComponent } from '../sub-slider/sub-slider.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
+import { FormsModule } from '@angular/forms';
+import { AllProductsService } from '../../Services/all-products.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FlexCenterDirective, CommonModule, RouterLink],
+  imports: [FlexCenterDirective, CommonModule, RouterLink, FormsModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
@@ -19,11 +21,13 @@ export class NavbarComponent implements OnInit {
   isLogin: boolean = false;
   cartCount: number = 0;
   userName: string = 'guest';
+  inputValue: string = '';
 
   constructor(
     private router: Router,
     private _authServe: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    private _allProductServ: AllProductsService
   ) {}
 
   ngOnInit(): void {
@@ -58,5 +62,9 @@ export class NavbarComponent implements OnInit {
       (count) => this.cartService.updateCartCount(count),
       (error) => console.error('Error fetching cart count:', error)
     );
+  }
+  onSearch() {
+    this.router.navigate(['/allProducts']);
+    this._allProductServ.changeSearchvalue(this.inputValue);
   }
 }

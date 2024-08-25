@@ -1,3 +1,5 @@
+/// <reference types="@angular/localize" />
+
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
@@ -9,6 +11,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor])), provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    provideAnimationsAsync(),
   ],
 }).catch((err) => console.error(err));
