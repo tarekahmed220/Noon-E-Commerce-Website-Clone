@@ -24,32 +24,32 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this._paymentServ.getOrderData().subscribe((response) => {
       this.orderDetails = response;
-      this.initConfig(); // تأكد من تكوين PayPal بعد تحميل البيانات
+      this.initConfig();
     });
   }
 
   private initConfig(): void {
-    // تأكد من تحميل orderDetails بشكل صحيح قبل الإعداد
     if (this.orderDetails && this.orderDetails.length > 0) {
-      this.total = this.orderDetails[0]?.totalPrice.toString(); // تأكد من أن totalPrice هو رقم وتحويله إلى سلسلة نصية إذا لزم الأمر
+      this.total = this.orderDetails[0]?.totalPrice?.toString() || '0';
+      const formattedTotal = this.total.replace(/[^\d.]/g, '');
 
-      const currency = 'USD'; // تأكد من التوافق مع العملة التي تستخدمها في PayPal
+      const currency = 'USD';
       this.payPalConfig = {
         currency: currency,
         clientId:
           'Af-HZkpKvU-QyeJIbDe2Dx10PAKHRKrEy6Fk8LZT_Zpxy86TBEM5Fb7YVs0m9iqqJyOWAlP627FgQwob',
-        createOrderOnClient: (data) =>
-          <ICreateOrderRequest>{
+        createOrderOnClient: (data) => {
+          const orderData: ICreateOrderRequest = {
             intent: 'CAPTURE',
             purchase_units: [
               {
                 amount: {
                   currency_code: currency,
-                  value: this.total,
+                  value: formattedTotal,
                   breakdown: {
                     item_total: {
                       currency_code: currency,
-                      value: this.total,
+                      value: formattedTotal,
                     },
                   },
                 },
@@ -58,12 +58,15 @@ export class PaymentComponent implements OnInit {
                   quantity: item.quantity,
                   unit_amount: {
                     currency_code: currency,
-                    value: item.productId.price,
+                    value: item.productId.price.replace(/[^\d.]/g, ''),
                   },
                 })),
               },
             ],
-          },
+          };
+          console.log('Creating order with data:', orderData);
+          return orderData;
+        },
         advanced: {
           commit: 'true',
         },
