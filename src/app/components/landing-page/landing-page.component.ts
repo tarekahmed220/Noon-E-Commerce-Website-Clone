@@ -8,6 +8,7 @@ import { SubSliderComponent } from '../sub-slider/sub-slider.component';
 import { SectionWithSliderComponent } from '../section-with-slider/section-with-slider.component';
 import { GetsomeproductsService } from '../../Services/getsomeproducts.service';
 import { IProduct, ISomeProducts } from '../../interface/ISomeProduct';
+
 @Component({
   selector: 'app-landing-page',
   standalone: true,
