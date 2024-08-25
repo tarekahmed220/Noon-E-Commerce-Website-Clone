@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductCartComponent } from './cart-product/cart-product.component';
+import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from '../products/products.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PaymentService } from '../../Services/payment.service';
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [ProductCartComponent, MatSnackBarModule],
+  imports: [ProductCartComponent,FormsModule,MatSnackBarModule],
+
   templateUrl: './cart.component.html',
 
   styleUrls: ['./cart.component.css'],
@@ -19,6 +21,7 @@ export class CartComponent implements OnInit {
   totalItems: number = 0;
   subTotal: number = 0;
   totalPrice: number = 0;
+  couponCode: string = ''; // تأكد من تعريف المتغير هنا
 
   constructor(
     private cartServ: CartService,
@@ -39,7 +42,11 @@ export class CartComponent implements OnInit {
 
   updateCartDetails(): void {
     this.subTotal = this.cartServ.getSubTotal();
-    this.totalPrice = this.cartServ.getTotalPrice();
+    this.applyCoupon()
+  }
+
+  applyCoupon(){
+    this.totalPrice = this.cartServ.getTotalPriceAfterCoupon(this.couponCode);
   }
   showSuccess() {
     this.snackBar.open('تمت العملية بنجاح!', 'إغلاق', {

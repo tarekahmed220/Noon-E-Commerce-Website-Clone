@@ -21,18 +21,11 @@
     <section class="w-full lg:w-1/3 mb-5">
       <div class="orderSummary p-4 bg-gray-100 rounded-lg shadow-md">
         <h5 class="font-semibold text-lg">Order Summary</h5>
-        <form action="" class="my-3 flex items-center">
-          <input
-            type="text"
-            class="px-3 py-2 flex-grow border rounded-l-md"
-            placeholder="Coupon Code"
-          />
-          <button
-            type="submit"
-            class="bg-primary text-white font-bold px-4 py-2 rounded-r-md"
-          >
-            APPLY
-          </button>
+
+        <form action="" (ngSubmit)="applyCoupon()" class="my-3 flex items-center">
+          <input type="text" [(ngModel)]="couponCode" name="coupon code" class="px-3 py-2 flex-grow border rounded-l-md" placeholder="Coupon Code" />
+          <button type="submit" class="bg-primary text-white font-bold px-4 py-2 rounded-r-md">APPLY</button>
+
         </form>
         <button
           class="viewOffers bg-white p-3 w-full flex items-center justify-between rounded-lg shadow-md"
